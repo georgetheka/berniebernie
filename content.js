@@ -1,5 +1,6 @@
 const IMG_MIN_SIZE = [200, 120];
 const NEW_IMG_RATIO = 0.70;
+const BERNIE_CLASS = 'bernie-bernie-bernie-img';
 const bernie = new Image();
 let bernieWidthHeightRatio = null;
 
@@ -8,6 +9,7 @@ function addBernie(img) {
     const h = img.height;
     const b = new Image();
     b.src = bernie.src;
+    b.className = BERNIE_CLASS;
     b.style.position = 'absolute';
     const newHeight = h * NEW_IMG_RATIO;
     const newWidth = newHeight * bernieWidthHeightRatio;
@@ -20,6 +22,10 @@ function addBernie(img) {
     img.parentElement.prepend(b);
 }
 
+function bernieNotAlreadyInIt(img) {
+    return img.parentElement.querySelector('.' + BERNIE_CLASS) === null;
+}
+
 function findImages() {
     return [].slice.call(document.getElementsByTagName('img'));
 }
@@ -27,7 +33,9 @@ function findImages() {
 function run() {
     findImages().filter(i => i.src.startsWith('http')
         && i.width > IMG_MIN_SIZE[0]
-        && i.height > IMG_MIN_SIZE[1]).forEach(addBernie);
+        && i.height > IMG_MIN_SIZE[1])
+        .filter(bernieNotAlreadyInIt)
+        .forEach(addBernie);
 }
 
 bernie.onload = function () {
