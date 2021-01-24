@@ -1,0 +1,27 @@
+{
+  "name": "berniebernie",
+  "version": "1.0",
+  "description": "Put bernie in every picture",
+  "manifest_version": 2,
+  "content_scripts": [
+    {
+      "matches": [
+        "http://*/*",
+        "https://*/*"
+      ],
+      "js": [
+        "content.js"
+      ]
+    }
+  ],
+  "permissions": [
+    "activeTab"
+  ],
+  "icons": {
+    "16": "images/bernie_icon_16.png",
+    "32": "images/bernie_icon_32.png",
+    "48": "images/bernie_icon_48.png",
+    "128": "images/bernie_icon_128.png"
+  },
+  "web_accessible_resources": ["images/bernie.png"]
+}
